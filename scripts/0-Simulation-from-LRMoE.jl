@@ -4,7 +4,7 @@ using DrWatson
 # Prerequisites (already included by DrWatson):
 # JLD2, LRMoE, DataFrames, Distributions, Plots, Random
 
-using DataFrames, Distributions, LRMoE, Plots, Random
+using DataFrames, Distributions, JLD2, LRMoE, Plots, Random
 
 # Random seed for reproducible results
 Random.seed!(7777)
