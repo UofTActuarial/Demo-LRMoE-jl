@@ -34,12 +34,12 @@ plot_series = collect(0.0:0.05:250)
 comp_density = hcat([pdf.(expert, plot_series) for expert in model_fit_dim2.model_fit.comp_dist]...)
 latent_class_prob = predict_class_prior(Matrix(X), model_fit_dim2.model_fit.α).prob
 fitted_density_person = comp_density * latent_class_prob'
-fitted_density = mean(fitted_density_person, dims=2)
+fitted_density = mean(fitted_density_person; dims=2)
 # Plot data vs fitted distribution
-histogram(Y_complete[:, 2]; bins=200, normalize = true, label="Data")
-plot!(plot_series, comp_density[:,1], linewidth=2, label="Component 1")
-plot!(plot_series, comp_density[:,2], linewidth=2, label="Component 2")
-plot!(plot_series, fitted_density, linewidth=2, label="Fitted Density")
+histogram(Y_complete[:, 2]; bins=200, normalize=true, label="Data")
+plot!(plot_series, comp_density[:, 1]; linewidth=2, label="Component 1")
+plot!(plot_series, comp_density[:, 2]; linewidth=2, label="Component 2")
+plot!(plot_series, fitted_density; linewidth=2, label="Fitted Density")
 title!("Fitted vs Data: Dimension 2 of Y")
 savefig(plotsdir("fitted-vs-data-complete-1d-model-dimension-2.png"))
 
@@ -48,7 +48,7 @@ savefig(plotsdir("fitted-vs-data-complete-1d-model-dimension-2.png"))
 model_guess = [LogNormalExpert(2.0, 0.3) InverseGaussianExpert(15, 30)]
 
 model_fit_dim2_alt = fit_LRMoE(Y_2, X, α_guess, model_guess;
-                           exact_Y=true, ecm_iter_max=100)
+                               exact_Y=true, ecm_iter_max=100)
 # Should converge in 89 runs with default ϵ
 
 # Model summary
@@ -76,15 +76,16 @@ plot_series = collect(0.0:0.05:250)
 comp_density = hcat([pdf.(expert, plot_series) for expert in model_fit_dim2_alt.model_fit.comp_dist]...)
 latent_class_prob = predict_class_prior(Matrix(X), model_fit_dim2_alt.model_fit.α).prob
 fitted_density_person = comp_density * latent_class_prob'
-fitted_density = mean(fitted_density_person, dims=2)
+fitted_density = mean(fitted_density_person; dims=2)
 # Plot data vs fitted distribution
-histogram(Y_complete[:, 2]; bins=200, normalize = true, label="Data")
-plot!(plot_series, comp_density[:,1], linewidth=2, label="Component 1")
-plot!(plot_series, comp_density[:,2], linewidth=2, label="Component 2")
-plot!(plot_series, fitted_density, linewidth=2, label="Fitted Density")
+histogram(Y_complete[:, 2]; bins=200, normalize=true, label="Data")
+plot!(plot_series, comp_density[:, 1]; linewidth=2, label="Component 1")
+plot!(plot_series, comp_density[:, 2]; linewidth=2, label="Component 2")
+plot!(plot_series, fitted_density; linewidth=2, label="Fitted Density")
 title!("Fitted vs Data: Dimension 2 of Y")
 savefig(plotsdir("fitted-vs-data-complete-1d-model-dimension-2-alternative.png"))
 
 # Save results
-jldsave(datadir("fitted-complete-1d-model-dimension-2.jld2"); model_fit = model_fit_dim2)
-jldsave(datadir("fitted-complete-1d-model-dimension-2-alternative.jld2"); model_fit = model_fit_dim2_alt)
+jldsave(datadir("fitted-complete-1d-model-dimension-2.jld2"); model_fit=model_fit_dim2)
+jldsave(datadir("fitted-complete-1d-model-dimension-2-alternative.jld2");
+        model_fit=model_fit_dim2_alt)
