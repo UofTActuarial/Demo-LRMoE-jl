@@ -13,4 +13,4 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [compat]
 DrWatson = "2.9.1"
-julia = "1.6.2"
+julia = "1.8.1"
