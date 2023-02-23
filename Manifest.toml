@@ -562,7 +562,9 @@ version = "3.0.0+1"
 
 [[deps.LRMoE]]
 deps = ["Clustering", "Distributions", "HypothesisTests", "InvertedIndices", "LinearAlgebra", "Logging", "Optim", "QuadGK", "Random", "Roots", "SpecialFunctions", "Statistics", "StatsFuns"]
-git-tree-sha1 = "5739e45b452d051178b7a4df4e8e19f8555f14a7"
+git-tree-sha1 = "35aa9bcfb75e390753804d6bb9de12daf25e098f"
+repo-rev = "dev-0.3.3"
+repo-url = "https://github.com/UofTActuarial/LRMoE.jl"
 uuid = "b6847444-3cfa-4637-857f-9c8c615f8351"
 version = "0.3.2"
 
