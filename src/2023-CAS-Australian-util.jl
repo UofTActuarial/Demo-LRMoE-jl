@@ -36,10 +36,12 @@ function generate_aus_auto_LRMoE_data(fml, df)
     df_fml_schema = StatsModels.apply_schema(fml, StatsModels.schema(fml, df))
     # get y and X
     y, X = StatsModels.modelcols(df_fml_schema, df)
+    X = hcat(fill(1, length(y)), X)
     # convert y to a matrix, which is needed for LRMoE
     y = reshape(y, length(y), 1)
     # keep track of the column names
     y_col, X_col = StatsModels.coefnames(df_fml_schema)
+    X_col = ["Intercept"; X_col]
     return y, X, y_col, X_col
 end
 
